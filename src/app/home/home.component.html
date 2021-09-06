@@ -1,0 +1,43 @@
+<div class="test">
+    <h2>Đây là Component Home</h2>
+    <h3>Chào bạn {{ Name }}</h3>
+    <input type="text" [(ngModel)]="Age" />
+    <h3>Tuổi bạn là {{ Age }}</h3>
+    <div *ngIf="Age > 18; then gia; else tre"></div>
+    <ng-template #gia>
+        <h3>Bạn quá già</h3>
+    </ng-template>
+    <ng-template #tre>
+        <h3>Bạn còn trẻ lắm</h3>
+    </ng-template>
+    <button (click)="resetName()">Reset name</button>
+    <h1>Trái cây</h1>
+    <div *ngFor="let Trai of TraiCay; let i = index">
+        <li>{{ i + 1 }}. {{ Trai }}.</li>
+    </div>
+    <br />
+    <table class="table">
+        <tr>
+            <th>Stt</th>
+            <th>Tên</th>
+            <th>Giá</th>
+            <th>Hạ giá</th>
+        </tr>
+        <tr *ngFor="let Trai of TraiCay2; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ Trai.Ten | uppercase}}</td>
+            <td class="right" [ngClass]="{ 'so-am': Trai.Gia < 0 }">{{ Trai.Gia | currency : "VND" : "symbol": "1.0-2"}}</td>
+            <td>{{ Trai.HaGia | onSale}}</td>
+        </tr>
+    </table>
+    <br/>
+    Tỉnh / Thành phố:
+    <select id="city" (change)="changeCity($event)">
+        <option *ngFor="let city of Cities" value="{{ city.City }}">{{ city.City }}</option>
+    </select>
+    <br/>
+    Quận / Huyện:
+    <select id="city">
+        <option *ngFor="let district of Districts" value="{{ district }}">{{ district }}</option>
+    </select>
+</div>
